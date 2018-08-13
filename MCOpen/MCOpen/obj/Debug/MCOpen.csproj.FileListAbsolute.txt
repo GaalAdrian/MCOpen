@@ -1,0 +1,10 @@
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\bin\Debug\MCOpen.exe.config
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\bin\Debug\MCOpen.exe
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\bin\Debug\MCOpen.pdb
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.csprojAssemblyReference.cache
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.Form1.resources
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.Properties.Resources.resources
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.GenerateResource.cache
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.CoreCompileInputs.cache
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.exe
+C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.pdb
