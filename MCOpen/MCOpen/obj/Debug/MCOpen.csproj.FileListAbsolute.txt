@@ -8,3 +8,15 @@ C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.GenerateRe
 C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.CoreCompileInputs.cache
 C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.exe
 C:\Users\Edwikehh\source\mcopen\MCOpen\MCOpen\obj\Debug\MCOpen.pdb
+E:\MCOpen\MCOpen\MCOpen\MCOpen\bin\Debug\MCOpen.exe.config
+E:\MCOpen\MCOpen\MCOpen\MCOpen\bin\Debug\MCOpen.exe
+E:\MCOpen\MCOpen\MCOpen\MCOpen\bin\Debug\MCOpen.pdb
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.csprojAssemblyReference.cache
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.Form1.resources
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.Properties.Resources.resources
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.GenerateResource.cache
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.CoreCompileInputs.cache
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.exe
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.pdb
+E:\MCOpen\MCOpen\MCOpen\MCOpen\bin\Debug\System.IO.Compression.dll
+E:\MCOpen\MCOpen\MCOpen\MCOpen\obj\Debug\MCOpen.csproj.CopyComplete

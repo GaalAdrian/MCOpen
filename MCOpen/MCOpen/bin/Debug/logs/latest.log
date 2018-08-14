@@ -1,0 +1,23 @@
+[17:32:38] [Client thread/INFO]: Setting user: robikek
+[17:32:41] [Client thread/INFO]: LWJGL Version: 3.1.6 build 14
+[17:32:44] [Client thread/INFO]: Reloading ResourceManager: Default
+[17:34:13] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[17:34:13] [Thread-2/INFO]: Initializing No Sound
+[17:34:13] [Thread-2/INFO]: (Silent Mode)
+[17:34:13] [Thread-2/INFO]: OpenAL initialized.
+[17:34:13] [Sound Library Loader/INFO]: Preloading sound minecraft:sounds/ambient/underwater/underwater_ambience.ogg
+[17:34:13] [Sound Library Loader/INFO]: Sound engine started
+[17:34:21] [Client thread/INFO]: Created: 1024x512 textures-atlas
+[17:34:25] [Client thread/INFO]: Narrator library for x64 successfully loaded
+[17:34:26] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[17:35:14] [Client thread/INFO]: Connecting to 127.0.0.1, 25565
+[17:35:37] [Client thread/ERROR]: Can't ping 127.0.0.1: Disconnected
+[17:35:39] [Client thread/ERROR]: Can't ping 127.0.0.1: Disconnected
+[17:35:44] [Client thread/ERROR]: Can't ping 127.0.0.1: Disconnected
+[17:35:48] [Client thread/ERROR]: Can't ping 127.0.0.1: Disconnected
+[17:35:50] [Client thread/ERROR]: Can't ping 127.0.0.1: Disconnected
+[17:35:52] [Client thread/ERROR]: Can't ping 127.0.0.1: Disconnected
+[17:35:56] [Client thread/INFO]: Connecting to 127.0.0.1, 25565
+[17:36:03] [Client thread/INFO]: Stopping!
+[17:36:04] [Client thread/INFO]: SoundSystem shutting down...
+[17:36:05] [Client thread/INFO]: SoundSystem Author: Paul Lamb, www.paulscode.com

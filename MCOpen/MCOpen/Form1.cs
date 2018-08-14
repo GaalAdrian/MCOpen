@@ -26,10 +26,10 @@ namespace MCOpen
 
         public Form1()
         {
-            InitializeComponent();
             fmap = ".MCOpen"; // Ezt kell átírni!
             appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             folder = Path.Combine(appd, fmap);
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace MCOpen
 
             // servers.dat frissítés
             WebClient wc = new WebClient();
-            Uri surl = new Uri("http://download1642.mediafire.com/wn9tphnf7jng/oocy78iar7hn3gh/servers.dat");
+            Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1");
             wc.DownloadFileAsync(surl, folder + "\\servers.dat");
 
             // Ha nincsen saját mappája, akkor készít és letölti a fájlokat, majd telepíti
@@ -55,7 +55,7 @@ namespace MCOpen
 
                 
                 wc.DownloadFileCompleted += new AsyncCompletedEventHandler(FileDownloadComplete);
-                Uri durl = new Uri("http://download1454.mediafire.com/25jgyc0xdsjg/horiyofx6tfr7d2/.openmc.zip");
+                Uri durl = new Uri("https://www.dropbox.com/s/uhpsm7pfj04nbp8/mcopen.zip?dl=1");
                 wc.DownloadFileAsync(durl, folder+"\\mcopen.zip");
             }
 

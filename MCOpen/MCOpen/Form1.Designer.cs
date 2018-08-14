@@ -112,6 +112,7 @@
             this.labelInfo.Size = new System.Drawing.Size(78, 23);
             this.labelInfo.TabIndex = 7;
             this.labelInfo.Text = "InfoText";
+            this.labelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
