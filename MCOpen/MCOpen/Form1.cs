@@ -26,12 +26,18 @@ namespace MCOpen
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label2.Hide();
+            label2.Hide(); // Infó szöveg eltűntetése
             // APPDATA/ROMAING MAPPA LÉTREHOZÁSA
             string fmap = ".MCOpen"; //Főmappa | Ezt kell csak átírni!
             string appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string mappa = Path.Combine(appd, fmap);
 
+            // servers.dat frissítés
+            WebClient wc = new WebClient();
+            Uri surl = new Uri("http://download1642.mediafire.com/wn9tphnf7jng/oocy78iar7hn3gh/servers.dat");
+            wc.DownloadFileAsync(surl, mappa + "\\servers.dat");
+
+            // Ha nincsen saját mappája, akkor készít és letölti a fájlokat, majd telepíti
             bool letez = System.IO.Directory.Exists(mappa);
             if(!letez)
             {
@@ -42,7 +48,7 @@ namespace MCOpen
                 Directory.CreateDirectory(mappa);
 
 
-                WebClient wc = new WebClient();
+                
                 wc.DownloadFileCompleted += new AsyncCompletedEventHandler(FileDownloadComplete);
                 Uri durl = new Uri("http://download1454.mediafire.com/25jgyc0xdsjg/horiyofx6tfr7d2/.openmc.zip");
                 wc.DownloadFileAsync(durl, mappa+"\\mcopen.zip");
