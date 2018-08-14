@@ -19,59 +19,60 @@ namespace MCOpen
 {
     public partial class Form1 : Form
     {
+
+        string fmap; // az AppDatában található fájl neve
+        string appd; // Az AppData helyszíne
+        string folder; // Az előző kettő kombinálva
+
         public Form1()
         {
             InitializeComponent();
+            fmap = ".MCOpen"; // Ezt kell átírni!
+            appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            folder = Path.Combine(appd, fmap);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label2.Hide(); // Infó szöveg eltűntetése
+            labelInfo.Hide(); // Infó szöveg eltűntetése
             // APPDATA/ROMAING MAPPA LÉTREHOZÁSA
-            string fmap = ".MCOpen"; //Főmappa | Ezt kell csak átírni!
-            string appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string mappa = Path.Combine(appd, fmap);
 
             // servers.dat frissítés
             WebClient wc = new WebClient();
             Uri surl = new Uri("http://download1642.mediafire.com/wn9tphnf7jng/oocy78iar7hn3gh/servers.dat");
-            wc.DownloadFileAsync(surl, mappa + "\\servers.dat");
+            wc.DownloadFileAsync(surl, folder + "\\servers.dat");
 
             // Ha nincsen saját mappája, akkor készít és letölti a fájlokat, majd telepíti
-            bool letez = System.IO.Directory.Exists(mappa);
-            if(!letez)
+            bool exists = System.IO.Directory.Exists(folder);
+            if(!exists)
             {
-                label2.Text = "Letöltés folyamatban..";
-                label2.Show();
-                button1.Enabled = false;
+                labelInfo.Text = "Letöltés folyamatban..";
+                labelInfo.Show();
+                btnLogin.Enabled = false;
                 MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is..");
-                Directory.CreateDirectory(mappa);
+                Directory.CreateDirectory(folder);
 
 
                 
                 wc.DownloadFileCompleted += new AsyncCompletedEventHandler(FileDownloadComplete);
                 Uri durl = new Uri("http://download1454.mediafire.com/25jgyc0xdsjg/horiyofx6tfr7d2/.openmc.zip");
-                wc.DownloadFileAsync(durl, mappa+"\\mcopen.zip");
+                wc.DownloadFileAsync(durl, folder+"\\mcopen.zip");
             }
 
 
         }
         private void FileDownloadComplete(object sender, AsyncCompletedEventArgs e)
         {
-            label2.Text = "Fájlok kicsomagolása..";
+            labelInfo.Text = "Fájlok kicsomagolása..";
             // KICSOMAGOLÁS
 
-            string fmap = ".MCOpen"; //Főmappa | Ezt kell csak átírni!
-            string appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string mappa = Path.Combine(appd, fmap);
-
-            string zipPath = mappa + @"\mcopen.zip";
-            string extractPath = mappa + @"";
+            string zipPath = folder + @"\mcopen.zip";
+            string extractPath = folder + @"";
 
             ZipFile.ExtractToDirectory(zipPath, extractPath);
-            label2.Hide();
+            labelInfo.Hide();
             MessageBox.Show("A letöltés befejeződött! Mostmár elindíthatod a játékot!");
-            button1.Enabled = true;
+            btnLogin.Enabled = true;
         }
 
 
@@ -121,13 +122,13 @@ namespace MCOpen
         private void button1_Click(object sender, EventArgs e)
         {
             string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @".mcopen"; //alap mc mappa
-            if (textBox1.Text.Length == 0 ) // ha nem írna semmit a név helyére
+            if (txtBoxUsername.Text.Length == 0 ) // ha nem írna semmit a név helyére
             {
                 MessageBox.Show("Írd be a felhasználóneved!");
             }
             else //ha írt a névre, akkor a kliens indítása
             {
-                string name = textBox1.Text;
+                string name = txtBoxUsername.Text;
                 string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " + // Egyelőre KÜLÖN natives mappa kell neki! 
                     dirr + @"\libraries\com\mojang\patchy\1.1\patchy-1.1.jar;" +
                     dirr + @"\libraries\oshi-project\oshi-core\1.1\oshi-core-1.1.jar;" +
