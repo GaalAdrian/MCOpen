@@ -1,1 +1,12 @@
 MCOpen/.vs/*
+
+# Build results, aka ez egy idő után nagy lesz, tehát nem kell becommitolni, és egyes esetekben breakelheti a buildet
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+
+# MSTest eredmények, ha lesz itt valaha testing ;)
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
