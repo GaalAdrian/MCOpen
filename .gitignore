@@ -1,0 +1,35 @@
+# Build results, aka ez egy idő után nagy lesz, tehát nem kell becommitolni, és egyes esetekben breakelheti a buildet
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+
+# MSTest eredmények, ha lesz itt valaha testing ;)
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Visual Studio mappái/cache, ezek sem kellenek
+.vs/*
+.vs/
+# VS 2015+
+*.vc.vc.opendb
+*.vc.db
+# ha valaki VS helyett Ridert vagy IntelliJ-t használ
+.idea/
+# The poor man's Visual Studio, aka Visual Studio Code.
+.vscode/
+
+
+# egyéni fájlok, 100% nem hasznos
+*.suo
+*.user
+*.sln.docstates
+
+# NuGet (ha lesz).
+Fölösleges,ugyanis minden fejlesztő a package-listából visszaállíthatja a függőségeket
+több megabájtnyi (vagy több) könytár letöltése nélkül.
+*.nupkg
+**/packages/*
+# MSBuild ide buildel, ezt nem kéne ignorelni
+!**/packages/build/
