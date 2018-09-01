@@ -38,9 +38,10 @@
             this.launcherText = new System.Windows.Forms.Label();
             this.playButton = new System.Windows.Forms.Button();
             this.newsButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.contactButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.versionText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -172,41 +173,41 @@
             this.newsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.newsButton.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // settingsButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(12, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(251, 46);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "BEÁLLÍTÁSOK";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
+            this.settingsButton.BackColor = System.Drawing.Color.Transparent;
+            this.settingsButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
+            this.settingsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.settingsButton.ForeColor = System.Drawing.Color.White;
+            this.settingsButton.Image = ((System.Drawing.Image)(resources.GetObject("settingsButton.Image")));
+            this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.settingsButton.Location = new System.Drawing.Point(12, 229);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(251, 46);
+            this.settingsButton.TabIndex = 11;
+            this.settingsButton.Text = "BEÁLLÍTÁSOK";
+            this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.settingsButton.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // contactButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.Location = new System.Drawing.Point(12, 281);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(251, 46);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "ELÉRHETŐSÉG";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.UseVisualStyleBackColor = false;
+            this.contactButton.BackColor = System.Drawing.Color.Transparent;
+            this.contactButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
+            this.contactButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.contactButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.contactButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.contactButton.ForeColor = System.Drawing.Color.White;
+            this.contactButton.Image = ((System.Drawing.Image)(resources.GetObject("contactButton.Image")));
+            this.contactButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.contactButton.Location = new System.Drawing.Point(12, 281);
+            this.contactButton.Name = "contactButton";
+            this.contactButton.Size = new System.Drawing.Size(251, 46);
+            this.contactButton.TabIndex = 12;
+            this.contactButton.Text = "ELÉRHETŐSÉG";
+            this.contactButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.contactButton.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -221,6 +222,19 @@
             this.panel1.Size = new System.Drawing.Size(390, 200);
             this.panel1.TabIndex = 13;
             // 
+            // versionText
+            // 
+            this.versionText.AutoSize = true;
+            this.versionText.BackColor = System.Drawing.Color.Transparent;
+            this.versionText.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.versionText.ForeColor = System.Drawing.Color.White;
+            this.versionText.Location = new System.Drawing.Point(845, 518);
+            this.versionText.Name = "versionText";
+            this.versionText.Size = new System.Drawing.Size(105, 23);
+            this.versionText.TabIndex = 14;
+            this.versionText.Text = "versionText";
+            this.versionText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,9 +242,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(980, 550);
+            this.Controls.Add(this.versionText);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.contactButton);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.newsButton);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.launcherText);
@@ -264,9 +279,10 @@
         private System.Windows.Forms.Label launcherText;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Button newsButton;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.Button contactButton;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label versionText;
     }
 }
 

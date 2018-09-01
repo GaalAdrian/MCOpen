@@ -12,6 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Compression;
 
+//=======================================\\
+//                                        \\              
+//               MCOPEN                    \\
+//      github.com/Edwikehh/MCOpen          \\
+//         discord.gg/582wZQJ [HU]           \\   
+//                                            \\
+//=============================================\\
 
 
 namespace MCOpen
@@ -19,10 +26,9 @@ namespace MCOpen
     public partial class Form1 : Form
     {
 
-        string fmap; // az AppDatában található fájl neve
-        string appd; // Az AppData helyszíne
-        // Az előző kettő kombinálva, VIGYÁZAT! Ha out of sync, abból problémák történhetnek.
-        // MINDIG külön állítsd be a fmap/appd párost!
+        string fmap; // your folder name (do not edit here)
+        string appd; // appdata
+
         string folder {
             get {
                 return Path.Combine(appd, fmap);
@@ -31,30 +37,36 @@ namespace MCOpen
 
         public Form1()
         {
-            fmap = ".MCOpen"; // A launcher mappája, ahol a játék van.
+            fmap = ".MCOpen"; // enter your folder name
             appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             InitializeComponent();
+
+            launcherText.Text = "MCOPEN"; //launchername
+            playButton.Text = "INDÍTÁS"; // = play
+            newsButton.Text = "HÍREK"; // = news
+            settingsButton.Text = "BEÁLLÍTÁSOK"; // = settings
+            contactButton.Text = "ELÉRHETŐSÉG"; // = contact
+            versionText.Text = "0.5v"; // launcher version
+
+            labelInfo.Hide(); // infotext hide()
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            labelInfo.Hide(); // Infó szöveg eltüntetése
-            launcherText.Text = "MCOPEN"; //Felső menü neve
-
-            // servers.dat frissítés
+            // servers.dat updater
             WebClient wc = new WebClient();
-            Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1");
+            Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1"); 
             try {
                 wc.DownloadFileAsync(surl, folder + "\\servers.dat");
 
-                // Ha nincsen saját mappája, akkor készít és letölti a fájlokat, majd telepíti
+                // creating new folder if does not exist
                 bool exists = Directory.Exists(folder);
                 if (!exists)
                 {
-                    labelInfo.Text = "Letöltés folyamatban...";
+                    labelInfo.Text = "Letöltés folyamatban..."; //downloading is in progress
                     labelInfo.Show();
                     btnLogin.Enabled = false;
-                    MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is...");
+                    MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is..."); // downloading is started! 
                     Directory.CreateDirectory(folder);
 
                     wc.DownloadFileCompleted += new AsyncCompletedEventHandler(FileDownloadComplete);
@@ -62,45 +74,37 @@ namespace MCOpen
                     wc.DownloadFileAsync(durl, folder + "\\mcopen.zip");
                 }
                 else {
-                    // ide kéne valami hash-alapú ellenőrzés, vagy  timestamp.
-                    //A status quo az, hogy könnyen out-of-syncben lehet a release verzióval, ha nem töröljük ki manuálisan a mappát.
+                    // ¯\_(ツ)_/¯
                 }
             }
             catch {
-                MessageBox.Show("Valamilyen hálózati hiba történt. Ellenőrizd az internetkapcsolatod.");
+                MessageBox.Show("Valamilyen hálózati hiba történt. Ellenőrizd az internetkapcsolatod."); //connection/network problem
             }
-
-
         }
+
         private void FileDownloadComplete(object sender, AsyncCompletedEventArgs e)
         {
-            labelInfo.Text = "Fájlok kicsomagolása...";
-            // KICSOMAGOLÁS
-
+            labelInfo.Text = "Fájlok kicsomagolása..."; // unzipping msg
             string zipPath = folder + @"\mcopen.zip";
             string extractPath = folder + @"";
 
             ZipFile.ExtractToDirectory(zipPath, extractPath);
             labelInfo.Hide();
-            MessageBox.Show("A letöltés befejeződött! Most már elindíthatod a játékot!");
-            btnLogin.Enabled = true;
+            MessageBox.Show("A letöltés befejeződött! Most már elindíthatod a játékot!"); // downloading is complete
+            btnLogin.Enabled = true; //login button enable
         }
 
-        #region belsős cucc, ne szerkeszd
-        
-        // ABLAK MOZGATÁS
+        #region do not edit
+        // movable form
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        // ne szerkeszd
+        
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         
-        #endregion
-
-        // FORM1 mozgatása egérrel
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -109,43 +113,35 @@ namespace MCOpen
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+        #endregion
 
-        
-        private void label2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        // bezárás
+        #region close, minimaze
+        // close
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        //asztalra
+        // minimize
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @".mcopen"; //alap mc mappa
-            if (txtBoxUsername.Text.Length == 0 ) // ha nem írna semmit a név helyére
+            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @""+fmap+"";
+            if (txtBoxUsername.Text.Length == 0 ) // if username box empty
             {
-                MessageBox.Show("Írd be a felhasználóneved!");
+                MessageBox.Show("Írd be a felhasználóneved!"); //enter your username
             }
-            else //ha írt a névre, akkor a kliens indítása
+            else
             {
                 try 
                 {
                     string name = txtBoxUsername.Text;
-                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " + // Egyelőre KÜLÖN natives mappa kell neki! 
+                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " + 
                         dirr + @"\libraries\com\mojang\patchy\1.1\patchy-1.1.jar;" +
                         dirr + @"\libraries\oshi-project\oshi-core\1.1\oshi-core-1.1.jar;" +
                         dirr + @"\libraries\net\java\dev\jna\jna\4.4.0\jna-4.4.0.jar;" +
@@ -184,12 +180,12 @@ namespace MCOpen
                         dirr + @"\libraries\com\mojang\text2speech\1.10.3\text2speech-1.10.3.jar;" +
                         dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
                         @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
-
+                        // --server YOURSERVERIP --port SERVERPORT
                         Process.Start("cmd.exe", "/C" + launch);
                 }
                 catch
                 {
-                MessageBox.Show("Nem sikerült elindítani a Minecraftot. A leggyakoribb ok az, hogy a java nincs installálva, vagy nincs benne a PATH-ban. Esetleg még megpróbálkozhatsz több memória adásával.");
+                MessageBox.Show("Nem sikerült elindítani a Minecraftot. A leggyakoribb ok az, hogy a java nincs installálva, vagy nincs benne a PATH-ban. Esetleg még megpróbálkozhatsz több memória adásával."); //java not found or something
                 }
 
             }
