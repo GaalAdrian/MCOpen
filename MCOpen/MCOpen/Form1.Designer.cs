@@ -1,6 +1,6 @@
 ﻿namespace MCOpen
 {
-    partial class serverBtnO
+    partial class MCOPENLauncher
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(serverBtnO));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MCOPENLauncher));
             this.txtBoxUsername = new System.Windows.Forms.TextBox();
             this.labelUsername = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
@@ -264,7 +264,7 @@
             this.serverT.Text = "serverT";
             this.serverT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // serverBtnO
+            // MCOPENLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -287,7 +287,7 @@
             this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "serverBtnO";
+            this.Name = "MCOPENLauncher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MCOPEN - 0.7";
             this.Load += new System.EventHandler(this.Form1_Load);

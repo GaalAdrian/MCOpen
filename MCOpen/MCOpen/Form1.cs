@@ -22,7 +22,7 @@ using System.IO.Compression;
 
 namespace MCOpen
 {
-    public partial class serverBtnO : Form
+    public partial class MCOPENLauncher : Form
     {
 
         string fmap; // your folder name (do not edit here)
@@ -34,7 +34,7 @@ namespace MCOpen
                 }
         }
 
-        public serverBtnO()
+        public MCOPENLauncher()
         {
             fmap = ".MCOpen"; // enter your folder name
             appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
