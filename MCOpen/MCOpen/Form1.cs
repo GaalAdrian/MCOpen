@@ -38,6 +38,7 @@ namespace MCOpen
         public MCOPENLauncher()
         {
             appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            InitializeComponent();
 
             #region setup your launcher here [name, version, etc]
             fmap = ".MCOpen"; // enter your folder name
@@ -62,8 +63,6 @@ namespace MCOpen
             serverTText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
             serverSText.Enabled = true;
             #endregion
-
-            InitializeComponent();
         }
 
         #region do not edit
