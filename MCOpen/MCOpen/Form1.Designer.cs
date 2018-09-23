@@ -37,12 +37,15 @@
             this.labelInfo = new System.Windows.Forms.Label();
             this.launcherText = new System.Windows.Forms.Label();
             this.versionText = new System.Windows.Forms.Label();
-            this.btnServerO = new System.Windows.Forms.Button();
+            this.serverBtnO = new System.Windows.Forms.Button();
+            this.serverBtnS = new System.Windows.Forms.Button();
             this.serverBtnT = new System.Windows.Forms.Button();
-            this.serverBtnTT = new System.Windows.Forms.Button();
             this.serverO = new System.Windows.Forms.Label();
             this.serverS = new System.Windows.Forms.Label();
             this.serverT = new System.Windows.Forms.Label();
+            this.serverOText = new System.Windows.Forms.Label();
+            this.serverSText = new System.Windows.Forms.Label();
+            this.serverTText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -156,23 +159,41 @@
             this.versionText.Text = "versionText";
             this.versionText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnServerO
+            // serverBtnO
             // 
-            this.btnServerO.BackColor = System.Drawing.Color.Transparent;
-            this.btnServerO.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnServerO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSpringGreen;
-            this.btnServerO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnServerO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnServerO.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnServerO.ForeColor = System.Drawing.Color.White;
-            this.btnServerO.Location = new System.Drawing.Point(304, 469);
-            this.btnServerO.Name = "btnServerO";
-            this.btnServerO.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnServerO.Size = new System.Drawing.Size(178, 50);
-            this.btnServerO.TabIndex = 15;
-            this.btnServerO.Text = "PLAY";
-            this.btnServerO.UseVisualStyleBackColor = false;
-            this.btnServerO.Click += new System.EventHandler(this.button1_Click_1);
+            this.serverBtnO.BackColor = System.Drawing.Color.Transparent;
+            this.serverBtnO.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.serverBtnO.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSpringGreen;
+            this.serverBtnO.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.serverBtnO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.serverBtnO.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverBtnO.ForeColor = System.Drawing.Color.White;
+            this.serverBtnO.Location = new System.Drawing.Point(304, 469);
+            this.serverBtnO.Name = "serverBtnO";
+            this.serverBtnO.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.serverBtnO.Size = new System.Drawing.Size(178, 50);
+            this.serverBtnO.TabIndex = 15;
+            this.serverBtnO.Text = "PLAY";
+            this.serverBtnO.UseVisualStyleBackColor = false;
+            this.serverBtnO.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // serverBtnS
+            // 
+            this.serverBtnS.BackColor = System.Drawing.Color.Transparent;
+            this.serverBtnS.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.serverBtnS.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSpringGreen;
+            this.serverBtnS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.serverBtnS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.serverBtnS.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverBtnS.ForeColor = System.Drawing.Color.White;
+            this.serverBtnS.Location = new System.Drawing.Point(540, 469);
+            this.serverBtnS.Name = "serverBtnS";
+            this.serverBtnS.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.serverBtnS.Size = new System.Drawing.Size(178, 50);
+            this.serverBtnS.TabIndex = 16;
+            this.serverBtnS.Text = "PLAY";
+            this.serverBtnS.UseVisualStyleBackColor = false;
+            this.serverBtnS.Click += new System.EventHandler(this.serverBtnT_Click);
             // 
             // serverBtnT
             // 
@@ -183,32 +204,14 @@
             this.serverBtnT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.serverBtnT.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverBtnT.ForeColor = System.Drawing.Color.White;
-            this.serverBtnT.Location = new System.Drawing.Point(540, 469);
+            this.serverBtnT.Location = new System.Drawing.Point(770, 469);
             this.serverBtnT.Name = "serverBtnT";
             this.serverBtnT.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.serverBtnT.Size = new System.Drawing.Size(178, 50);
-            this.serverBtnT.TabIndex = 16;
+            this.serverBtnT.TabIndex = 17;
             this.serverBtnT.Text = "PLAY";
             this.serverBtnT.UseVisualStyleBackColor = false;
-            this.serverBtnT.Click += new System.EventHandler(this.serverBtnT_Click);
-            // 
-            // serverBtnTT
-            // 
-            this.serverBtnTT.BackColor = System.Drawing.Color.Transparent;
-            this.serverBtnTT.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.serverBtnTT.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSpringGreen;
-            this.serverBtnTT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.serverBtnTT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.serverBtnTT.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.serverBtnTT.ForeColor = System.Drawing.Color.White;
-            this.serverBtnTT.Location = new System.Drawing.Point(770, 469);
-            this.serverBtnTT.Name = "serverBtnTT";
-            this.serverBtnTT.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.serverBtnTT.Size = new System.Drawing.Size(178, 50);
-            this.serverBtnTT.TabIndex = 17;
-            this.serverBtnTT.Text = "PLAY";
-            this.serverBtnTT.UseVisualStyleBackColor = false;
-            this.serverBtnTT.Click += new System.EventHandler(this.serverBtnTT_Click);
+            this.serverBtnT.Click += new System.EventHandler(this.serverBtnTT_Click);
             // 
             // serverO
             // 
@@ -264,6 +267,42 @@
             this.serverT.Text = "serverT";
             this.serverT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // serverOText
+            // 
+            this.serverOText.AutoSize = true;
+            this.serverOText.BackColor = System.Drawing.Color.Transparent;
+            this.serverOText.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverOText.ForeColor = System.Drawing.Color.White;
+            this.serverOText.Location = new System.Drawing.Point(301, 315);
+            this.serverOText.Name = "serverOText";
+            this.serverOText.Size = new System.Drawing.Size(92, 19);
+            this.serverOText.TabIndex = 21;
+            this.serverOText.Text = "serverOText";
+            // 
+            // serverSText
+            // 
+            this.serverSText.AutoSize = true;
+            this.serverSText.BackColor = System.Drawing.Color.Transparent;
+            this.serverSText.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverSText.ForeColor = System.Drawing.Color.White;
+            this.serverSText.Location = new System.Drawing.Point(536, 315);
+            this.serverSText.Name = "serverSText";
+            this.serverSText.Size = new System.Drawing.Size(89, 19);
+            this.serverSText.TabIndex = 22;
+            this.serverSText.Text = "serverSText";
+            // 
+            // serverTText
+            // 
+            this.serverTText.AutoSize = true;
+            this.serverTText.BackColor = System.Drawing.Color.Transparent;
+            this.serverTText.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverTText.ForeColor = System.Drawing.Color.White;
+            this.serverTText.Location = new System.Drawing.Point(766, 315);
+            this.serverTText.Name = "serverTText";
+            this.serverTText.Size = new System.Drawing.Size(89, 19);
+            this.serverTText.TabIndex = 23;
+            this.serverTText.Text = "serverTText";
+            // 
             // MCOPENLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,12 +310,15 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(980, 550);
+            this.Controls.Add(this.serverTText);
+            this.Controls.Add(this.serverSText);
+            this.Controls.Add(this.serverOText);
             this.Controls.Add(this.serverT);
             this.Controls.Add(this.serverS);
             this.Controls.Add(this.serverO);
-            this.Controls.Add(this.serverBtnTT);
             this.Controls.Add(this.serverBtnT);
-            this.Controls.Add(this.btnServerO);
+            this.Controls.Add(this.serverBtnS);
+            this.Controls.Add(this.serverBtnO);
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.versionText);
@@ -309,12 +351,15 @@
         private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.Label launcherText;
         private System.Windows.Forms.Label versionText;
-        private System.Windows.Forms.Button btnServerO;
+        private System.Windows.Forms.Button serverBtnO;
+        private System.Windows.Forms.Button serverBtnS;
         private System.Windows.Forms.Button serverBtnT;
-        private System.Windows.Forms.Button serverBtnTT;
         private System.Windows.Forms.Label serverO;
         private System.Windows.Forms.Label serverS;
         private System.Windows.Forms.Label serverT;
+        private System.Windows.Forms.Label serverOText;
+        private System.Windows.Forms.Label serverSText;
+        private System.Windows.Forms.Label serverTText;
     }
 }
 

@@ -46,8 +46,19 @@ namespace MCOpen
             btnLogin.Text = "START MINECRAFT";
 
             serverO.Text = "HUB";  // FIRST SERVER
+            serverBtnO.Enabled = true; // PLAY BUTTON 
+            serverOText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
+            serverOText.Enabled = true;
+
             serverS.Text = "SKYPVP";  // SECOND SERVER
+            serverBtnS.Enabled = true; // PLAY BUTTON 
+            serverSText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
+            serverSText.Enabled = true;
+
             serverT.Text = "MINIGAMES";  // THIRD SERVER
+            serverBtnT.Enabled = true; // PLAY BUTTON 
+            serverTText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
+            serverSText.Enabled = true;
 
             labelInfo.Hide(); // infotext hide()
         }
@@ -67,6 +78,9 @@ namespace MCOpen
                     labelInfo.Text = "Letöltés folyamatban..."; //downloading isin progress
                     labelInfo.Show();
                     btnLogin.Enabled = false;
+                    serverBtnO.Enabled = false;
+                    serverBtnS.Enabled = false;
+                    serverBtnT.Enabled = false;
                     MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is..."); // downloading is started! 
                     Directory.CreateDirectory(folder);
 
@@ -93,6 +107,9 @@ namespace MCOpen
             labelInfo.Hide();
             MessageBox.Show("A letöltés befejeződött! Most már elindíthatod a játékot!"); // downloading is complete
             btnLogin.Enabled = true; //login button enable
+            serverBtnO.Enabled = true;
+            serverBtnS.Enabled = true;
+            serverBtnT.Enabled = true;
         }
 
         #region do not edit
