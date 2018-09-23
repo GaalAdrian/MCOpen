@@ -28,7 +28,8 @@ namespace MCOpen
         string fmap; // your folder name (do not edit here)
         string appd; // appdata
 
-        string folder {
+        string folder
+        {
             get {
                 return Path.Combine(appd, fmap);
                 }
@@ -36,15 +37,16 @@ namespace MCOpen
 
         public MCOPENLauncher()
         {
-            fmap = ".MCOpen"; // enter your folder name
             appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            InitializeComponent();
 
+            #region setup your launcher here [name, version, etc]
+            fmap = ".MCOpen"; // enter your folder name
             labelUsername.Text = "USERNAME";
             launcherText.Text = "MCOPEN"; //launchername
-            versionText.Text = "0.7v"; // launcher version
+            versionText.Text = "0.8v"; // launcher version
             btnLogin.Text = "START MINECRAFT";
 
+            labelInfo.Hide();
             serverO.Text = "HUB";  // FIRST SERVER
             serverBtnO.Enabled = true; // PLAY BUTTON 
             serverOText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
@@ -59,13 +61,47 @@ namespace MCOpen
             serverBtnT.Enabled = true; // PLAY BUTTON 
             serverTText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
             serverSText.Enabled = true;
+            #endregion
 
-            labelInfo.Hide(); // infotext hide()
+            InitializeComponent();
         }
 
+        #region do not edit
+        // close
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        // minimize
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        // movable form
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        #endregion
+
+        // downloading minecraft & servers.dat updater
         private void Form1_Load(object sender, EventArgs e)
         {
-            // servers.dat updater
             WebClient wc = new WebClient();
             Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1"); 
             try {
@@ -97,6 +133,7 @@ namespace MCOpen
             }
         }
 
+        //unzipping
         private void FileDownloadComplete(object sender, AsyncCompletedEventArgs e)
         {
             labelInfo.Text = "Fájlok kicsomagolása..."; // unzipping msg
@@ -112,41 +149,7 @@ namespace MCOpen
             serverBtnT.Enabled = true;
         }
 
-        #region do not edit
-        // movable form
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-
-        
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-        
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-        #endregion
-
-        #region close, minimaze
-        // close
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        // minimize
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-        #endregion
-
+        // start minecraft
         private void button1_Click(object sender, EventArgs e)
         {
             // START MINECRAFT
@@ -211,6 +214,8 @@ namespace MCOpen
 
             }
         }
+
+        #region servers [ip,port]
 
         // 1. SERVER 
         private void button1_Click_1(object sender, EventArgs e)
@@ -350,12 +355,13 @@ namespace MCOpen
             #endregion
         }
 
+        // 3. SERVER
         private void serverBtnTT_Click(object sender, EventArgs e)
         {
             String serverTIP = "localhost"; // Server IP
             String serverTPort = "25565"; // Server Port
 
-            #region ServerS
+            #region ServerT
             string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
             if (txtBoxUsername.Text.Length == 0) // if username box empty
             {
@@ -417,5 +423,6 @@ namespace MCOpen
             }
             #endregion
         }
+        #endregion
     }
 }

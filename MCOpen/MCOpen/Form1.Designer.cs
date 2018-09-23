@@ -71,9 +71,9 @@
             this.labelUsername.ForeColor = System.Drawing.Color.White;
             this.labelUsername.Location = new System.Drawing.Point(6, 167);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(248, 36);
+            this.labelUsername.Size = new System.Drawing.Size(200, 36);
             this.labelUsername.TabIndex = 1;
-            this.labelUsername.Text = "FELHASZNÁLÓNÉV";
+            this.labelUsername.Text = "labelUsername";
             // 
             // btnLogin
             // 
@@ -89,7 +89,7 @@
             this.btnLogin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnLogin.Size = new System.Drawing.Size(243, 52);
             this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "BEJELENTKEZÉS";
+            this.btnLogin.Text = "btnLogin";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -121,7 +121,7 @@
             this.labelInfo.BackColor = System.Drawing.Color.Transparent;
             this.labelInfo.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelInfo.ForeColor = System.Drawing.Color.White;
-            this.labelInfo.Location = new System.Drawing.Point(12, 411);
+            this.labelInfo.Location = new System.Drawing.Point(35, 393);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(78, 23);
             this.labelInfo.TabIndex = 7;
@@ -138,7 +138,7 @@
             this.launcherText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.launcherText.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.launcherText.ForeColor = System.Drawing.Color.White;
-            this.launcherText.Location = new System.Drawing.Point(12, 84);
+            this.launcherText.Location = new System.Drawing.Point(17, 90);
             this.launcherText.Name = "launcherText";
             this.launcherText.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.launcherText.Size = new System.Drawing.Size(164, 33);
