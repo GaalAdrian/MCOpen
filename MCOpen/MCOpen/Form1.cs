@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Compression;
+using System.Net.Sockets;
 
 //=======================================\\
 //                                        \\              
@@ -24,6 +25,19 @@ namespace MCOpen
 {
     public partial class MCOPENLauncher : Form
     {
+        #region IP,PORT - EDIT HERE
+        // 1. SERVER
+        String serverOIP = "localhost";
+        int serverOPort = 25565;
+
+        // 2. SERVER
+        String serverSIP = "localhost";
+        int serverSPort = 25565;
+
+        // 3. SERVER
+        String serverTIP = "localhost";
+        int serverTPort = 25565;
+        #endregion
 
         string fmap; // your folder name (do not edit here)
         string appd; // appdata
@@ -48,6 +62,7 @@ namespace MCOpen
             btnLogin.Text = "START MINECRAFT";
 
             labelInfo.Hide();
+
             serverO.Text = "HUB";  // FIRST SERVER
             serverBtnO.Enabled = true; // PLAY BUTTON 
             serverOText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
@@ -63,6 +78,7 @@ namespace MCOpen
             serverTText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
             serverSText.Enabled = true;
             #endregion
+        
         }
 
         #region do not edit
@@ -101,6 +117,52 @@ namespace MCOpen
         // downloading minecraft & servers.dat updater
         private void Form1_Load(object sender, EventArgs e)
         {
+            #region ping
+            if (true) //ping:true
+            {
+
+
+                try
+                {
+                    using (var client = new TcpClient(serverOIP, serverOPort)) ;
+
+                }
+                catch (SocketException ex)
+                {
+                    serverBtnO.Enabled = false;
+                    serverBtnO.Text = "OFFLINE";
+                    //MessageBox.Show("Hiba a pingelesnel:'" + serverOIP + ":" + serverOPort.ToString() + "'");
+
+                }
+
+                try
+                {
+                    using (var client = new TcpClient(serverSIP, serverSPort)) ;
+
+                }
+                catch (SocketException ex)
+                {
+                    serverBtnS.Enabled = false;
+                    serverBtnS.Text = "OFFLINE";
+                    //MessageBox.Show("Hiba a pingelesnel:'" + serverOIP + ":" + serverOPort.ToString() + "'");
+
+                }
+
+                try
+                {
+                    using (var client = new TcpClient(serverTIP, serverTPort)) ;
+
+                }
+                catch (SocketException ex)
+                {
+                    serverBtnT.Enabled = false;
+                    serverBtnT.Text = "OFFLINE";
+                    //MessageBox.Show("Hiba a pingelesnel:'" + serverOIP + ":" + serverOPort.ToString() + "'");
+
+                }
+            }
+            #endregion
+
             WebClient wc = new WebClient();
             Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1"); 
             try {
@@ -217,11 +279,8 @@ namespace MCOpen
         #region servers [ip,port]
 
         // 1. SERVER 
-        private void button1_Click_1(object sender, EventArgs e)
+        public void button1_Click_1(object sender, EventArgs e)
         {
-            String serverOIP = "localhost"; // Server IP
-            String serverOPort = "25565"; // Server Port
-
             #region ServerO
             string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
             if (txtBoxUsername.Text.Length == 0) // if username box empty
@@ -288,9 +347,6 @@ namespace MCOpen
         // 2. SERVER
         private void serverBtnT_Click(object sender, EventArgs e)
         {
-            String serverSIP = "localhost"; // Server IP
-            String serverSPort = "25565"; // Server Port
-
             #region ServerS
             string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
             if (txtBoxUsername.Text.Length == 0) // if username box empty
@@ -357,9 +413,6 @@ namespace MCOpen
         // 3. SERVER
         private void serverBtnTT_Click(object sender, EventArgs e)
         {
-            String serverTIP = "localhost"; // Server IP
-            String serverTPort = "25565"; // Server Port
-
             #region ServerT
             string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
             if (txtBoxUsername.Text.Length == 0) // if username box empty
