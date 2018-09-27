@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 //=======================================\\
 //                                        \\              
@@ -114,11 +115,28 @@ namespace MCOpen
         }
         #endregion
 
+        #region GetMACAddress
+        public string GetMACAddress()
+        {
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            String sMacAddress = string.Empty;
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (sMacAddress == String.Empty) 
+                {
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    sMacAddress = adapter.GetPhysicalAddress().ToString();
+                }
+            }
+            return sMacAddress;
+        }
+        #endregion
+
         // downloading minecraft & servers.dat updater
         private void Form1_Load(object sender, EventArgs e)
         {
             #region ping
-            if (true) //ping:true
+            if (false) //ping:true
             {
 
 
@@ -163,9 +181,11 @@ namespace MCOpen
             }
             #endregion
 
+            #region servers.dat update
             WebClient wc = new WebClient();
             Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1"); 
-            try {
+            try
+            {
                 wc.DownloadFileAsync(surl, folder + "\\servers.dat");
 
                 // creating new folder if does not exist
@@ -189,10 +209,13 @@ namespace MCOpen
                     // ¯\_(ツ)_/¯
                 }
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("Valamilyen hálózati hiba történt. Ellenőrizd az internetkapcsolatod."); //connection/network problem
             }
+            #endregion
         }
+
 
         //unzipping
         private void FileDownloadComplete(object sender, AsyncCompletedEventArgs e)
@@ -276,10 +299,10 @@ namespace MCOpen
             }
         }
 
-        #region servers [ip,port]
+        #region servers
 
         // 1. SERVER 
-        public void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             #region ServerO
             string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
