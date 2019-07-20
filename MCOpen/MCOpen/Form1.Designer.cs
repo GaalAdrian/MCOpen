@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MCOPENLauncher));
             this.txtBoxUsername = new System.Windows.Forms.TextBox();
             this.labelUsername = new System.Windows.Forms.Label();
@@ -46,6 +47,7 @@
             this.serverOText = new System.Windows.Forms.Label();
             this.serverSText = new System.Windows.Forms.Label();
             this.serverTText = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -55,11 +57,11 @@
             this.txtBoxUsername.BackColor = System.Drawing.Color.White;
             this.txtBoxUsername.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtBoxUsername.ForeColor = System.Drawing.Color.Black;
-            this.txtBoxUsername.Location = new System.Drawing.Point(12, 207);
+            this.txtBoxUsername.Location = new System.Drawing.Point(39, 246);
             this.txtBoxUsername.MaxLength = 16;
             this.txtBoxUsername.Multiline = true;
             this.txtBoxUsername.Name = "txtBoxUsername";
-            this.txtBoxUsername.Size = new System.Drawing.Size(240, 25);
+            this.txtBoxUsername.Size = new System.Drawing.Size(258, 25);
             this.txtBoxUsername.TabIndex = 0;
             this.txtBoxUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -69,7 +71,7 @@
             this.labelUsername.BackColor = System.Drawing.Color.Transparent;
             this.labelUsername.Font = new System.Drawing.Font("Candara", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelUsername.ForeColor = System.Drawing.Color.White;
-            this.labelUsername.Location = new System.Drawing.Point(6, 167);
+            this.labelUsername.Location = new System.Drawing.Point(37, 207);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Size = new System.Drawing.Size(200, 36);
             this.labelUsername.TabIndex = 1;
@@ -84,10 +86,10 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(9, 250);
+            this.btnLogin.Location = new System.Drawing.Point(39, 288);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLogin.Size = new System.Drawing.Size(243, 52);
+            this.btnLogin.Size = new System.Drawing.Size(258, 52);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "btnLogin";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -97,7 +99,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(9, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(922, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(28, 24);
             this.pictureBox1.TabIndex = 5;
@@ -108,7 +110,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(43, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(890, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(26, 27);
             this.pictureBox2.TabIndex = 6;
@@ -121,12 +123,12 @@
             this.labelInfo.BackColor = System.Drawing.Color.Transparent;
             this.labelInfo.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelInfo.ForeColor = System.Drawing.Color.White;
-            this.labelInfo.Location = new System.Drawing.Point(35, 393);
+            this.labelInfo.Location = new System.Drawing.Point(39, 368);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(78, 23);
             this.labelInfo.TabIndex = 7;
             this.labelInfo.Text = "InfoText";
-            this.labelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // launcherText
             // 
@@ -138,7 +140,7 @@
             this.launcherText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.launcherText.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.launcherText.ForeColor = System.Drawing.Color.White;
-            this.launcherText.Location = new System.Drawing.Point(17, 90);
+            this.launcherText.Location = new System.Drawing.Point(12, 4);
             this.launcherText.Name = "launcherText";
             this.launcherText.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.launcherText.Size = new System.Drawing.Size(164, 33);
@@ -168,7 +170,7 @@
             this.serverBtnO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.serverBtnO.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverBtnO.ForeColor = System.Drawing.Color.White;
-            this.serverBtnO.Location = new System.Drawing.Point(304, 469);
+            this.serverBtnO.Location = new System.Drawing.Point(336, 288);
             this.serverBtnO.Name = "serverBtnO";
             this.serverBtnO.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.serverBtnO.Size = new System.Drawing.Size(178, 50);
@@ -186,7 +188,7 @@
             this.serverBtnS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.serverBtnS.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverBtnS.ForeColor = System.Drawing.Color.White;
-            this.serverBtnS.Location = new System.Drawing.Point(540, 469);
+            this.serverBtnS.Location = new System.Drawing.Point(554, 288);
             this.serverBtnS.Name = "serverBtnS";
             this.serverBtnS.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.serverBtnS.Size = new System.Drawing.Size(178, 50);
@@ -204,7 +206,7 @@
             this.serverBtnT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.serverBtnT.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverBtnT.ForeColor = System.Drawing.Color.White;
-            this.serverBtnT.Location = new System.Drawing.Point(770, 469);
+            this.serverBtnT.Location = new System.Drawing.Point(762, 288);
             this.serverBtnT.Name = "serverBtnT";
             this.serverBtnT.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.serverBtnT.Size = new System.Drawing.Size(178, 50);
@@ -221,15 +223,15 @@
             this.serverO.AutoSize = true;
             this.serverO.BackColor = System.Drawing.Color.Transparent;
             this.serverO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.serverO.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverO.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverO.ForeColor = System.Drawing.Color.White;
-            this.serverO.Location = new System.Drawing.Point(312, 269);
+            this.serverO.Location = new System.Drawing.Point(357, 139);
             this.serverO.Name = "serverO";
             this.serverO.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.serverO.Size = new System.Drawing.Size(106, 33);
+            this.serverO.Size = new System.Drawing.Size(94, 29);
             this.serverO.TabIndex = 18;
             this.serverO.Text = "serverO";
-            this.serverO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.serverO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // serverS
             // 
@@ -239,15 +241,15 @@
             this.serverS.AutoSize = true;
             this.serverS.BackColor = System.Drawing.Color.Transparent;
             this.serverS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.serverS.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverS.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverS.ForeColor = System.Drawing.Color.White;
-            this.serverS.Location = new System.Drawing.Point(546, 269);
+            this.serverS.Location = new System.Drawing.Point(569, 139);
             this.serverS.Name = "serverS";
             this.serverS.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.serverS.Size = new System.Drawing.Size(101, 33);
+            this.serverS.Size = new System.Drawing.Size(89, 29);
             this.serverS.TabIndex = 19;
             this.serverS.Text = "serverS";
-            this.serverS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.serverS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // serverT
             // 
@@ -257,15 +259,15 @@
             this.serverT.AutoSize = true;
             this.serverT.BackColor = System.Drawing.Color.Transparent;
             this.serverT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.serverT.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.serverT.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverT.ForeColor = System.Drawing.Color.White;
-            this.serverT.Location = new System.Drawing.Point(773, 271);
+            this.serverT.Location = new System.Drawing.Point(783, 139);
             this.serverT.Name = "serverT";
             this.serverT.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.serverT.Size = new System.Drawing.Size(101, 33);
+            this.serverT.Size = new System.Drawing.Size(89, 29);
             this.serverT.TabIndex = 20;
             this.serverT.Text = "serverT";
-            this.serverT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.serverT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // serverOText
             // 
@@ -273,7 +275,7 @@
             this.serverOText.BackColor = System.Drawing.Color.Transparent;
             this.serverOText.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverOText.ForeColor = System.Drawing.Color.White;
-            this.serverOText.Location = new System.Drawing.Point(301, 315);
+            this.serverOText.Location = new System.Drawing.Point(340, 184);
             this.serverOText.Name = "serverOText";
             this.serverOText.Size = new System.Drawing.Size(92, 19);
             this.serverOText.TabIndex = 21;
@@ -285,7 +287,7 @@
             this.serverSText.BackColor = System.Drawing.Color.Transparent;
             this.serverSText.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverSText.ForeColor = System.Drawing.Color.White;
-            this.serverSText.Location = new System.Drawing.Point(536, 315);
+            this.serverSText.Location = new System.Drawing.Point(558, 184);
             this.serverSText.Name = "serverSText";
             this.serverSText.Size = new System.Drawing.Size(89, 19);
             this.serverSText.TabIndex = 22;
@@ -297,11 +299,16 @@
             this.serverTText.BackColor = System.Drawing.Color.Transparent;
             this.serverTText.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.serverTText.ForeColor = System.Drawing.Color.White;
-            this.serverTText.Location = new System.Drawing.Point(766, 315);
+            this.serverTText.Location = new System.Drawing.Point(766, 184);
             this.serverTText.Name = "serverTText";
             this.serverTText.Size = new System.Drawing.Size(89, 19);
             this.serverTText.TabIndex = 23;
             this.serverTText.Text = "serverTText";
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
             // MCOPENLauncher
             // 
@@ -329,9 +336,10 @@
             this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MCOPENLauncher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MCOPEN - 0.7";
+            this.Text = "MCOPEN - 0.8.5";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -360,6 +368,7 @@
         private System.Windows.Forms.Label serverOText;
         private System.Windows.Forms.Label serverSText;
         private System.Windows.Forms.Label serverTText;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 

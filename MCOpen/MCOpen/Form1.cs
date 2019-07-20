@@ -15,10 +15,10 @@ using System.Net.Sockets;
 using System.Net.NetworkInformation;
 
 //=======================================\\
-//                                        \\              
+//                                        \\
 //               MCOPEN                    \\
 //      github.com/Edwikehh/MCOpen          \\
-//         discord.gg/582wZQJ [HU]           \\   
+//         discord.gg/582wZQJ [HU]           \\
 //                                            \\
 //=============================================\\
 
@@ -59,7 +59,7 @@ namespace MCOpen
             fmap = ".MCOpen"; // enter your folder name
             labelUsername.Text = "USERNAME";
             launcherText.Text = "MCOPEN"; //launchername
-            versionText.Text = "0.8v"; // launcher version
+            versionText.Text = "0.8.5v"; // launcher version
             btnLogin.Text = "START MINECRAFT";
 
             labelInfo.Hide();
@@ -113,6 +113,7 @@ namespace MCOpen
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
         #endregion
 
         #region GetMACAddress
@@ -136,7 +137,7 @@ namespace MCOpen
         private void Form1_Load(object sender, EventArgs e)
         {
             #region ping
-            if (false) //ping:true
+            if (true) //ping:true
             {
 
 
@@ -192,13 +193,20 @@ namespace MCOpen
                 bool exists = Directory.Exists(folder);
                 if (!exists)
                 {
-                    labelInfo.Text = "Letöltés folyamatban..."; //downloading isin progress
+                    notifyIcon1.Visible = true;
+                    notifyIcon1.Icon = SystemIcons.Exclamation;
+                    notifyIcon1.BalloonTipTitle = "MCOpen";
+                    notifyIcon1.BalloonTipText = "A letöltés megkezdődött. Internettől függően eltarthat pár percig. Ez kifagyást is eredményezhet.";
+                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                    notifyIcon1.ShowBalloonTip(1000);
+
+                    labelInfo.Text = "Letöltés folyamatban...";
                     labelInfo.Show();
                     btnLogin.Enabled = false;
                     serverBtnO.Enabled = false;
                     serverBtnS.Enabled = false;
                     serverBtnT.Enabled = false;
-                    MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is..."); // downloading is started! 
+                    MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is..."); 
                     Directory.CreateDirectory(folder);
 
                     wc.DownloadFileCompleted += new AsyncCompletedEventHandler(FileDownloadComplete);
@@ -220,6 +228,13 @@ namespace MCOpen
         //unzipping
         private void FileDownloadComplete(object sender, AsyncCompletedEventArgs e)
         {
+            notifyIcon1.Visible = true;
+            notifyIcon1.Icon = SystemIcons.Exclamation;
+            notifyIcon1.BalloonTipTitle = "MCOpen";
+            notifyIcon1.BalloonTipText = "Sikeres letöltés! A kicsomagolás megkezdődött!";
+            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon1.ShowBalloonTip(1000);
+
             labelInfo.Text = "Fájlok kicsomagolása..."; // unzipping msg
             string zipPath = folder + @"\mcopen.zip";
             string extractPath = folder + @"";
@@ -231,9 +246,16 @@ namespace MCOpen
             serverBtnO.Enabled = true;
             serverBtnS.Enabled = true;
             serverBtnT.Enabled = true;
+
+            notifyIcon1.Visible = true;
+            notifyIcon1.Icon = SystemIcons.Exclamation;
+            notifyIcon1.BalloonTipTitle = "MCOpen";
+            notifyIcon1.BalloonTipText = "Sikeres kicsomagolás! Most már elindíthatod a játékot.";
+            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon1.ShowBalloonTip(1000);
         }
 
-        // start minecraft
+        // start default minecraft
         private void button1_Click(object sender, EventArgs e)
         {
             // START MINECRAFT
@@ -289,7 +311,22 @@ namespace MCOpen
                         @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
                     // --server YOURSERVERIP --port SERVERPORT
                     #endregion
-                    Process.Start("cmd.exe", "/C" + launch);
+
+
+                        notifyIcon1.Visible = true;
+                        notifyIcon1.Icon = SystemIcons.Exclamation;
+                        notifyIcon1.BalloonTipTitle = "MCOpen";
+                        notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
+                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                        notifyIcon1.ShowBalloonTip(1000);
+
+                        this.WindowState = FormWindowState.Minimized;
+                        ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
+                        p.Arguments = "/C" + launch;
+                        p.WindowStyle = ProcessWindowStyle.Hidden;
+                        Process.Start(p);
+                        txtBoxUsername.Text = "";
+
                 }
                 catch
                 {
@@ -356,7 +393,19 @@ namespace MCOpen
                         dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
                         @" --username " + name + @" --version 1.13"  + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --server "+serverOIP+" --port "+ serverOPort +" --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
                     #endregion
-                    Process.Start("cmd.exe", "/C" + launch);
+                    notifyIcon1.Visible = true;
+                    notifyIcon1.Icon = SystemIcons.Exclamation;
+                    notifyIcon1.BalloonTipTitle = "MCOpen";
+                    notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
+                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                    notifyIcon1.ShowBalloonTip(1000);
+
+                    this.WindowState = FormWindowState.Minimized;
+                    ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
+                    p.Arguments = "/C" + launch;
+                    p.WindowStyle = ProcessWindowStyle.Hidden; 
+                    Process.Start(p);
+                    txtBoxUsername.Text = "";
                 }
                 catch
                 {
@@ -422,7 +471,19 @@ namespace MCOpen
                         dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
                         @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --server " + serverSIP + " --port "+ serverSPort +" --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
                     #endregion
-                    Process.Start("cmd.exe", "/C" + launch);
+                    notifyIcon1.Visible = true;
+                    notifyIcon1.Icon = SystemIcons.Exclamation;
+                    notifyIcon1.BalloonTipTitle = "MCOpen";
+                    notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
+                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                    notifyIcon1.ShowBalloonTip(1000);
+
+                    this.WindowState = FormWindowState.Minimized;
+                    ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
+                    p.Arguments = "/C" + launch;
+                    p.WindowStyle = ProcessWindowStyle.Hidden;
+                    Process.Start(p);
+                    txtBoxUsername.Text = "";
                 }
                 catch
                 {
@@ -488,7 +549,19 @@ namespace MCOpen
                         dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
                         @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --server " + serverTIP + " --port " + serverTPort + " --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
                     #endregion
-                    Process.Start("cmd.exe", "/C" + launch);
+                    notifyIcon1.Visible = true;
+                    notifyIcon1.Icon = SystemIcons.Exclamation;
+                    notifyIcon1.BalloonTipTitle = "MCOpen";
+                    notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
+                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                    notifyIcon1.ShowBalloonTip(1000);
+
+                    this.WindowState = FormWindowState.Minimized;
+                    ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
+                    p.Arguments = "/C" + launch;
+                    p.WindowStyle = ProcessWindowStyle.Hidden;
+                    Process.Start(p);
+                    txtBoxUsername.Text = ""; 
                 }
                 catch
                 {
