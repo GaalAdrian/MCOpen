@@ -13,6 +13,8 @@ using System.Windows.Forms;
 using System.IO.Compression;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 //=======================================\\
 //                                        \\
@@ -26,19 +28,7 @@ namespace MCOpen
 {
     public partial class MCOPENLauncher : Form
     {
-        #region IP,PORT - EDIT HERE
-        // 1. SERVER
-        String serverOIP = "localhost";
-        int serverOPort = 25565;
 
-        // 2. SERVER
-        String serverSIP = "localhost";
-        int serverSPort = 25565;
-
-        // 3. SERVER
-        String serverTIP = "localhost";
-        int serverTPort = 25565;
-        #endregion
 
         string fmap; // your folder name (do not edit here)
         string appd; // appdata
@@ -55,32 +45,30 @@ namespace MCOpen
             appd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             InitializeComponent();
 
+            #region panel
+            loginPanel.Visible = true;
+            mainPanel.Visible = false;
+            #endregion
+
             #region setup your launcher here [name, version, etc]
             fmap = ".MCOpen"; // enter your folder name
-            labelUsername.Text = "USERNAME";
+            labelUsername.Text = "FELHASZNÁLÓNÉV";
+            labelPassword.Text = "JELSZÓ";
             launcherText.Text = "MCOPEN"; //launchername
-            versionText.Text = "0.8.5v"; // launcher version
-            btnLogin.Text = "START MINECRAFT";
+            versionText.Text = "0.9.0v"; 
+            btnLogin.Text = "LOGIN";
+            btnPlay.Text = "PLAY MINECRAFT";
+            btnLogout.Text = "KIJELENTKEZÉS";
+            btnSettings.Text = "BEÁLLÍTÁSOK";
+
+            string version = versionText.Text;
+            this.Text = "MCOPEN - " + version;
 
             labelInfo.Hide();
-
-            serverO.Text = "HUB";  // FIRST SERVER
-            serverBtnO.Enabled = true; // PLAY BUTTON 
-            serverOText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
-            serverOText.Enabled = true;
-
-            serverS.Text = "SKYPVP";  // SECOND SERVER
-            serverBtnS.Enabled = true; // PLAY BUTTON 
-            serverSText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
-            serverSText.Enabled = true;
-
-            serverT.Text = "MINIGAMES";  // THIRD SERVER
-            serverBtnT.Enabled = true; // PLAY BUTTON 
-            serverTText.Text = "Lorem ipsum dolor sit \namet,consectetur adipiscin \nelit. Aliquam vestibulum \npurus at est \naccumsan bibendum.";
-            serverSText.Enabled = true;
             #endregion
-        
+
         }
+
 
         #region do not edit
         // close
@@ -136,52 +124,6 @@ namespace MCOpen
         // downloading minecraft & servers.dat updater
         private void Form1_Load(object sender, EventArgs e)
         {
-            #region ping
-            if (true) //ping:true
-            {
-
-
-                try
-                {
-                    using (var client = new TcpClient(serverOIP, serverOPort)) ;
-
-                }
-                catch (SocketException ex)
-                {
-                    serverBtnO.Enabled = false;
-                    serverBtnO.Text = "OFFLINE";
-                    //MessageBox.Show("Hiba a pingelesnel:'" + serverOIP + ":" + serverOPort.ToString() + "'");
-
-                }
-
-                try
-                {
-                    using (var client = new TcpClient(serverSIP, serverSPort)) ;
-
-                }
-                catch (SocketException ex)
-                {
-                    serverBtnS.Enabled = false;
-                    serverBtnS.Text = "OFFLINE";
-                    //MessageBox.Show("Hiba a pingelesnel:'" + serverOIP + ":" + serverOPort.ToString() + "'");
-
-                }
-
-                try
-                {
-                    using (var client = new TcpClient(serverTIP, serverTPort)) ;
-
-                }
-                catch (SocketException ex)
-                {
-                    serverBtnT.Enabled = false;
-                    serverBtnT.Text = "OFFLINE";
-                    //MessageBox.Show("Hiba a pingelesnel:'" + serverOIP + ":" + serverOPort.ToString() + "'");
-
-                }
-            }
-            #endregion
-
             #region servers.dat update
             WebClient wc = new WebClient();
             Uri surl = new Uri("https://www.dropbox.com/s/1lhv8dqrafu58tb/servers.dat?dl=1"); 
@@ -203,9 +145,6 @@ namespace MCOpen
                     labelInfo.Text = "Letöltés folyamatban...";
                     labelInfo.Show();
                     btnLogin.Enabled = false;
-                    serverBtnO.Enabled = false;
-                    serverBtnS.Enabled = false;
-                    serverBtnT.Enabled = false;
                     MessageBox.Show("Letöltés megkezdődött! Ez eltarthat néhány percig is..."); 
                     Directory.CreateDirectory(folder);
 
@@ -222,20 +161,21 @@ namespace MCOpen
                 MessageBox.Show("Valamilyen hálózati hiba történt. Ellenőrizd az internetkapcsolatod."); //connection/network problem
             }
             #endregion
+
         }
 
 
         //unzipping
         private void FileDownloadComplete(object sender, AsyncCompletedEventArgs e)
         {
+            labelInfo.Text = "Fájlok kicsomagolása..."; // unzipping msg
             notifyIcon1.Visible = true;
             notifyIcon1.Icon = SystemIcons.Exclamation;
-            notifyIcon1.BalloonTipTitle = "MCOpen";
+            notifyIcon1.BalloonTipTitle = launcherText.Text;
             notifyIcon1.BalloonTipText = "Sikeres letöltés! A kicsomagolás megkezdődött!";
             notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon1.ShowBalloonTip(1000);
 
-            labelInfo.Text = "Fájlok kicsomagolása..."; // unzipping msg
             string zipPath = folder + @"\mcopen.zip";
             string extractPath = folder + @"";
 
@@ -243,34 +183,78 @@ namespace MCOpen
             labelInfo.Hide();
             MessageBox.Show("A letöltés befejeződött! Most már elindíthatod a játékot!"); // downloading is complete
             btnLogin.Enabled = true; //login button enable
-            serverBtnO.Enabled = true;
-            serverBtnS.Enabled = true;
-            serverBtnT.Enabled = true;
 
             notifyIcon1.Visible = true;
             notifyIcon1.Icon = SystemIcons.Exclamation;
-            notifyIcon1.BalloonTipTitle = "MCOpen";
+            notifyIcon1.BalloonTipTitle = launcherText.Text;
             notifyIcon1.BalloonTipText = "Sikeres kicsomagolás! Most már elindíthatod a játékot.";
             notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon1.ShowBalloonTip(1000);
         }
 
-        // start default minecraft
+        public void ReadMyData(string myConnString)
+        {
+            string mySelectQuery = "SELECT rank, coin FROM users WHERE username='" + txtBoxUsername.Text + "'";
+            MySqlConnection myConnection = new MySqlConnection("server = localhost; user id = root; database = mcopen_teszt");
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, myConnection);
+            myConnection.Open();
+            MySqlDataReader myReader;
+            myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                txtRank.Text = myReader.GetString(0);
+                txtMoney.Text = myReader.GetString(1) + " coin";
+            }
+            myReader.Close();
+            myConnection.Close();
+        }
+
+
+        // login
         private void button1_Click(object sender, EventArgs e)
         {
-            // START MINECRAFT
-            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @""+fmap+"";
-            if (txtBoxUsername.Text.Length == 0 ) // if username box empty
+            
+            #region edit SQL here
+            MySqlConnection conn = new MySqlConnection("server = localhost; user id = root; database = mcopen_teszt");
+            MySqlDataAdapter sda = new MySqlDataAdapter("select * from users where username = '" + txtBoxUsername.Text + "' and password = '" + txtBoxPassword.Text + "'", conn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+
+
+
+            if (dt.Rows[0][0].ToString() == "1")
             {
-                MessageBox.Show("Írd be a felhasználóneved!"); //enter your username
+                MessageBox.Show("Sikeres bejelentkezés!", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information); //login succ
+                btnLogin.Enabled = false;
+                mainPanel.Visible = true;
+                txtBoxUsername.Enabled = false;
+                txtBoxPassword.Enabled = false;
+                txtBoxPassword.Text = "";
+
             }
             else
             {
-                try 
+                MessageBox.Show("Sikertelen bejelentkezés! Próbáld meg újra!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error); //login fail
+                txtBoxPassword.Text = "";
+            }
+            ReadMyData(conn.ToString());
+
+            #endregion
+
+        }
+
+
+        // MineCraft starter
+        private void btnPlay_Click_1(object sender, EventArgs e)
+        {
+            #region default minecraft starter
+            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
+
+                try
                 {
                     #region starter
                     string name = txtBoxUsername.Text;
-                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " + 
+                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " +
                         dirr + @"\libraries\com\mojang\patchy\1.1\patchy-1.1.jar;" +
                         dirr + @"\libraries\oshi-project\oshi-core\1.1\oshi-core-1.1.jar;" +
                         dirr + @"\libraries\net\java\dev\jna\jna\4.4.0\jna-4.4.0.jar;" +
@@ -309,172 +293,11 @@ namespace MCOpen
                         dirr + @"\libraries\com\mojang\text2speech\1.10.3\text2speech-1.10.3.jar;" +
                         dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
                         @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
-                    // --server YOURSERVERIP --port SERVERPORT
-                    #endregion
-
-
-                        notifyIcon1.Visible = true;
-                        notifyIcon1.Icon = SystemIcons.Exclamation;
-                        notifyIcon1.BalloonTipTitle = "MCOpen";
-                        notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
-                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                        notifyIcon1.ShowBalloonTip(1000);
-
-                        this.WindowState = FormWindowState.Minimized;
-                        ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
-                        p.Arguments = "/C" + launch;
-                        p.WindowStyle = ProcessWindowStyle.Hidden;
-                        Process.Start(p);
-                        txtBoxUsername.Text = "";
-
-                }
-                catch
-                {
-                MessageBox.Show("Nem sikerült elindítani a Minecraftot. A leggyakoribb ok az, hogy a java nincs installálva, vagy nincs benne a PATH-ban. Esetleg még megpróbálkozhatsz több memória adásával."); //java not found or something
-                }
-
-            }
-        }
-
-        #region servers
-
-        // 1. SERVER 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            #region ServerO
-            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
-            if (txtBoxUsername.Text.Length == 0) // if username box empty
-            {
-                MessageBox.Show("Írd be a felhasználóneved!"); //enter your username
-            }
-            else 
-            {
-                try
-                {
-                    #region starter
-                    string name = txtBoxUsername.Text;
-                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " +
-                        dirr + @"\libraries\com\mojang\patchy\1.1\patchy-1.1.jar;" +
-                        dirr + @"\libraries\oshi-project\oshi-core\1.1\oshi-core-1.1.jar;" +
-                        dirr + @"\libraries\net\java\dev\jna\jna\4.4.0\jna-4.4.0.jar;" +
-                        dirr + @"\libraries\net\java\dev\jna\platform\3.4.0\platform-3.4.0.jar;" +
-                        dirr + @"\libraries\com\ibm\icu\icu4j-core-mojang\51.2\icu4j-core-mojang-51.2.jar;" +
-                        dirr + @"\libraries\net\sf\jopt-simple\jopt-simple\5.0.3\jopt-simple-5.0.3.jar;" +
-                        dirr + @"\libraries\com\paulscode\codecjorbis\20101023\codecjorbis-20101023.jar;" +
-                        dirr + @"\libraries\com\paulscode\codecwav\20101023\codecwav-20101023.jar;" +
-                        dirr + @"\libraries\com\paulscode\libraryjavasound\20101123\libraryjavasound-20101123.jar;" +
-                        dirr + @"\libraries\com\paulscode\soundsystem\20120107\soundsystem-20120107.jar;" +
-                        dirr + @"\libraries\io\netty\netty-all\4.1.25.Final\netty-all-4.1.25.Final.jar;" +
-                        dirr + @"\libraries\com\google\guava\guava\21.0\guava-21.0.jar;" +
-                        dirr + @"\libraries\org\apache\commons\commons-lang3\3.5\commons-lang3-3.5.jar;" +
-                        dirr + @"\libraries\commons-io\commons-io\2.5\commons-io-2.5.jar;" +
-                        dirr + @"\libraries\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;" +
-                        dirr + @"\libraries\net\java\jinput\jinput\2.0.5\jinput-2.0.5.jar;" +
-                        dirr + @"\libraries\net\java\jutils\jutils\1.0.0\jutils-1.0.0.jar;" +
-                        dirr + @"\libraries\com\mojang\brigadier\0.1.27\brigadier-0.1.27.jar;" +
-                        dirr + @"\libraries\com\mojang\datafixerupper\1.0.16\datafixerupper-1.0.16.jar;" +
-                        dirr + @"\libraries\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar;" +
-                        dirr + @"\libraries\com\mojang\authlib\1.5.25\authlib-1.5.25.jar;" +
-                        dirr + @"\libraries\org\apache\commons\commons-compress\1.8.1\commons-compress-1.8.1.jar;" +
-                        dirr + @"\libraries\org\apache\httpcomponents\httpclient\4.3.3\httpclient-4.3.3.jar;" +
-                        dirr + @"\libraries\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar;" +
-                        dirr + @"\libraries\org\apache\httpcomponents\httpcore\4.3.2\httpcore-4.3.2.jar;" +
-                        dirr + @"\libraries\it\unimi\dsi\fastutil\7.1.0\fastutil-7.1.0.jar;" +
-                        dirr + @"\libraries\org\apache\logging\log4j\log4j-api\2.8.1\log4j-api-2.8.1.jar;" +
-                        dirr + @"\libraries\org\apache\logging\log4j\log4j-core\2.8.1\log4j-core-2.8.1.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl\3.1.6\lwjgl-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-jemalloc\3.1.6\lwjgl-jemalloc-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-openal\3.1.6\lwjgl-openal-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-opengl\3.1.6\lwjgl-opengl-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-glfw\3.1.6\lwjgl-glfw-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-stb\3.1.6\lwjgl-stb-3.1.6.jar;" +
-                        dirr + @"\libraries\com\mojang\realms\1.13.3\realms-1.13.3.jar;" +
-                        dirr + @"\libraries\com\mojang\text2speech\1.10.3\text2speech-1.10.3.jar;" +
-                        dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
-                        @" --username " + name + @" --version 1.13"  + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --server "+serverOIP+" --port "+ serverOPort +" --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
                     #endregion
                     notifyIcon1.Visible = true;
                     notifyIcon1.Icon = SystemIcons.Exclamation;
                     notifyIcon1.BalloonTipTitle = "MCOpen";
-                    notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
-                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                    notifyIcon1.ShowBalloonTip(1000);
-
-                    this.WindowState = FormWindowState.Minimized;
-                    ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
-                    p.Arguments = "/C" + launch;
-                    p.WindowStyle = ProcessWindowStyle.Hidden; 
-                    Process.Start(p);
-                    txtBoxUsername.Text = "";
-                }
-                catch
-                {
-                    MessageBox.Show("Nem sikerült elindítani a Minecraftot. A leggyakoribb ok az, hogy a java nincs installálva, vagy nincs benne a PATH-ban. Esetleg még megpróbálkozhatsz több memória adásával."); //java not found or something
-                }
-
-            }
-            #endregion
-        }
-
-        // 2. SERVER
-        private void serverBtnT_Click(object sender, EventArgs e)
-        {
-            #region ServerS
-            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
-            if (txtBoxUsername.Text.Length == 0) // if username box empty
-            {
-                MessageBox.Show("Írd be a felhasználóneved!"); //enter your username
-            }
-            else
-            {
-                try
-                {
-                    #region starter
-                    string name = txtBoxUsername.Text;
-                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " +
-                        dirr + @"\libraries\com\mojang\patchy\1.1\patchy-1.1.jar;" +
-                        dirr + @"\libraries\oshi-project\oshi-core\1.1\oshi-core-1.1.jar;" +
-                        dirr + @"\libraries\net\java\dev\jna\jna\4.4.0\jna-4.4.0.jar;" +
-                        dirr + @"\libraries\net\java\dev\jna\platform\3.4.0\platform-3.4.0.jar;" +
-                        dirr + @"\libraries\com\ibm\icu\icu4j-core-mojang\51.2\icu4j-core-mojang-51.2.jar;" +
-                        dirr + @"\libraries\net\sf\jopt-simple\jopt-simple\5.0.3\jopt-simple-5.0.3.jar;" +
-                        dirr + @"\libraries\com\paulscode\codecjorbis\20101023\codecjorbis-20101023.jar;" +
-                        dirr + @"\libraries\com\paulscode\codecwav\20101023\codecwav-20101023.jar;" +
-                        dirr + @"\libraries\com\paulscode\libraryjavasound\20101123\libraryjavasound-20101123.jar;" +
-                        dirr + @"\libraries\com\paulscode\soundsystem\20120107\soundsystem-20120107.jar;" +
-                        dirr + @"\libraries\io\netty\netty-all\4.1.25.Final\netty-all-4.1.25.Final.jar;" +
-                        dirr + @"\libraries\com\google\guava\guava\21.0\guava-21.0.jar;" +
-                        dirr + @"\libraries\org\apache\commons\commons-lang3\3.5\commons-lang3-3.5.jar;" +
-                        dirr + @"\libraries\commons-io\commons-io\2.5\commons-io-2.5.jar;" +
-                        dirr + @"\libraries\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;" +
-                        dirr + @"\libraries\net\java\jinput\jinput\2.0.5\jinput-2.0.5.jar;" +
-                        dirr + @"\libraries\net\java\jutils\jutils\1.0.0\jutils-1.0.0.jar;" +
-                        dirr + @"\libraries\com\mojang\brigadier\0.1.27\brigadier-0.1.27.jar;" +
-                        dirr + @"\libraries\com\mojang\datafixerupper\1.0.16\datafixerupper-1.0.16.jar;" +
-                        dirr + @"\libraries\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar;" +
-                        dirr + @"\libraries\com\mojang\authlib\1.5.25\authlib-1.5.25.jar;" +
-                        dirr + @"\libraries\org\apache\commons\commons-compress\1.8.1\commons-compress-1.8.1.jar;" +
-                        dirr + @"\libraries\org\apache\httpcomponents\httpclient\4.3.3\httpclient-4.3.3.jar;" +
-                        dirr + @"\libraries\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar;" +
-                        dirr + @"\libraries\org\apache\httpcomponents\httpcore\4.3.2\httpcore-4.3.2.jar;" +
-                        dirr + @"\libraries\it\unimi\dsi\fastutil\7.1.0\fastutil-7.1.0.jar;" +
-                        dirr + @"\libraries\org\apache\logging\log4j\log4j-api\2.8.1\log4j-api-2.8.1.jar;" +
-                        dirr + @"\libraries\org\apache\logging\log4j\log4j-core\2.8.1\log4j-core-2.8.1.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl\3.1.6\lwjgl-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-jemalloc\3.1.6\lwjgl-jemalloc-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-openal\3.1.6\lwjgl-openal-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-opengl\3.1.6\lwjgl-opengl-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-glfw\3.1.6\lwjgl-glfw-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-stb\3.1.6\lwjgl-stb-3.1.6.jar;" +
-                        dirr + @"\libraries\com\mojang\realms\1.13.3\realms-1.13.3.jar;" +
-                        dirr + @"\libraries\com\mojang\text2speech\1.10.3\text2speech-1.10.3.jar;" +
-                        dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
-                        @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --server " + serverSIP + " --port "+ serverSPort +" --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
-                    #endregion
-                    notifyIcon1.Visible = true;
-                    notifyIcon1.Icon = SystemIcons.Exclamation;
-                    notifyIcon1.BalloonTipTitle = "MCOpen";
-                    notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
+                    notifyIcon1.BalloonTipText = "Sikeres bejelentkezés! Hamarosan megjelenik a játék.";
                     notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
                     notifyIcon1.ShowBalloonTip(1000);
 
@@ -483,94 +306,31 @@ namespace MCOpen
                     p.Arguments = "/C" + launch;
                     p.WindowStyle = ProcessWindowStyle.Hidden;
                     Process.Start(p);
-                    txtBoxUsername.Text = "";
                 }
                 catch
                 {
                     MessageBox.Show("Nem sikerült elindítani a Minecraftot. A leggyakoribb ok az, hogy a java nincs installálva, vagy nincs benne a PATH-ban. Esetleg még megpróbálkozhatsz több memória adásával."); //java not found or something
                 }
-
-            }
             #endregion
         }
 
-        // 3. SERVER
-        private void serverBtnTT_Click(object sender, EventArgs e)
+        private void btnLogout_Click(object sender, EventArgs e)
         {
-            #region ServerT
-            string dirr = Environment.GetEnvironmentVariable("APPDATA") + "\\" + @"" + fmap + "";
-            if (txtBoxUsername.Text.Length == 0) // if username box empty
-            {
-                MessageBox.Show("Írd be a felhasználóneved!"); //enter your username
-            }
-            else
-            {
-                try
-                {
-                    #region starter
-                    string name = txtBoxUsername.Text;
-                    string launch = @"java.exe" + " -Xmx" + 1024 + "M" + " -Djava.library.path=" + dirr + @"\versions\1.13\natives" + @" -cp " +
-                        dirr + @"\libraries\com\mojang\patchy\1.1\patchy-1.1.jar;" +
-                        dirr + @"\libraries\oshi-project\oshi-core\1.1\oshi-core-1.1.jar;" +
-                        dirr + @"\libraries\net\java\dev\jna\jna\4.4.0\jna-4.4.0.jar;" +
-                        dirr + @"\libraries\net\java\dev\jna\platform\3.4.0\platform-3.4.0.jar;" +
-                        dirr + @"\libraries\com\ibm\icu\icu4j-core-mojang\51.2\icu4j-core-mojang-51.2.jar;" +
-                        dirr + @"\libraries\net\sf\jopt-simple\jopt-simple\5.0.3\jopt-simple-5.0.3.jar;" +
-                        dirr + @"\libraries\com\paulscode\codecjorbis\20101023\codecjorbis-20101023.jar;" +
-                        dirr + @"\libraries\com\paulscode\codecwav\20101023\codecwav-20101023.jar;" +
-                        dirr + @"\libraries\com\paulscode\libraryjavasound\20101123\libraryjavasound-20101123.jar;" +
-                        dirr + @"\libraries\com\paulscode\soundsystem\20120107\soundsystem-20120107.jar;" +
-                        dirr + @"\libraries\io\netty\netty-all\4.1.25.Final\netty-all-4.1.25.Final.jar;" +
-                        dirr + @"\libraries\com\google\guava\guava\21.0\guava-21.0.jar;" +
-                        dirr + @"\libraries\org\apache\commons\commons-lang3\3.5\commons-lang3-3.5.jar;" +
-                        dirr + @"\libraries\commons-io\commons-io\2.5\commons-io-2.5.jar;" +
-                        dirr + @"\libraries\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;" +
-                        dirr + @"\libraries\net\java\jinput\jinput\2.0.5\jinput-2.0.5.jar;" +
-                        dirr + @"\libraries\net\java\jutils\jutils\1.0.0\jutils-1.0.0.jar;" +
-                        dirr + @"\libraries\com\mojang\brigadier\0.1.27\brigadier-0.1.27.jar;" +
-                        dirr + @"\libraries\com\mojang\datafixerupper\1.0.16\datafixerupper-1.0.16.jar;" +
-                        dirr + @"\libraries\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar;" +
-                        dirr + @"\libraries\com\mojang\authlib\1.5.25\authlib-1.5.25.jar;" +
-                        dirr + @"\libraries\org\apache\commons\commons-compress\1.8.1\commons-compress-1.8.1.jar;" +
-                        dirr + @"\libraries\org\apache\httpcomponents\httpclient\4.3.3\httpclient-4.3.3.jar;" +
-                        dirr + @"\libraries\commons-logging\commons-logging\1.1.3\commons-logging-1.1.3.jar;" +
-                        dirr + @"\libraries\org\apache\httpcomponents\httpcore\4.3.2\httpcore-4.3.2.jar;" +
-                        dirr + @"\libraries\it\unimi\dsi\fastutil\7.1.0\fastutil-7.1.0.jar;" +
-                        dirr + @"\libraries\org\apache\logging\log4j\log4j-api\2.8.1\log4j-api-2.8.1.jar;" +
-                        dirr + @"\libraries\org\apache\logging\log4j\log4j-core\2.8.1\log4j-core-2.8.1.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl\3.1.6\lwjgl-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-jemalloc\3.1.6\lwjgl-jemalloc-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-openal\3.1.6\lwjgl-openal-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-opengl\3.1.6\lwjgl-opengl-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-glfw\3.1.6\lwjgl-glfw-3.1.6.jar;" +
-                        dirr + @"\libraries\org\lwjgl\lwjgl-stb\3.1.6\lwjgl-stb-3.1.6.jar;" +
-                        dirr + @"\libraries\com\mojang\realms\1.13.3\realms-1.13.3.jar;" +
-                        dirr + @"\libraries\com\mojang\text2speech\1.10.3\text2speech-1.10.3.jar;" +
-                        dirr + @"\versions\1.13\1.13.jar net.minecraft.client.main.Main" +
-                        @" --username " + name + @" --version 1.13" + @" --gameDir " + dirr + @" --assetsDir " + dirr + @"\assets\ --assetIndex 1.13 --server " + serverTIP + " --port " + serverTPort + " --uuid 00000000-0000-0000-0000-000000000000 --accessToken null --userProperties [] --userType legacy --width 925 --height 530";
-                    #endregion
-                    notifyIcon1.Visible = true;
-                    notifyIcon1.Icon = SystemIcons.Exclamation;
-                    notifyIcon1.BalloonTipTitle = "MCOpen";
-                    notifyIcon1.BalloonTipText = "A MineCraft sikeresen elindult. Hamarosan megjelenik a játék.";
-                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                    notifyIcon1.ShowBalloonTip(1000);
+            txtBoxUsername.Text = "";
+            txtBoxPassword.Text = "";
+            txtMoney.Text = "";
+            txtRank.Text = "";
+            mainPanel.Visible = false;
+            btnLogin.Enabled = true;
+            txtBoxUsername.Enabled = true;
+            txtBoxPassword.Enabled = true;
+            MessageBox.Show("Sikeres kijelentkezés!");
 
-                    this.WindowState = FormWindowState.Minimized;
-                    ProcessStartInfo p = new ProcessStartInfo("cmd.exe");
-                    p.Arguments = "/C" + launch;
-                    p.WindowStyle = ProcessWindowStyle.Hidden;
-                    Process.Start(p);
-                    txtBoxUsername.Text = ""; 
-                }
-                catch
-                {
-                    MessageBox.Show("Nem sikerült elindítani a Minecraftot. A leggyakoribb ok az, hogy a java nincs installálva, vagy nincs benne a PATH-ban. Esetleg még megpróbálkozhatsz több memória adásával."); //java not found or something
-                }
-
-            }
-            #endregion
         }
-        #endregion
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hamarosan. . .");
+        }
     }
 }
